@@ -236,26 +236,82 @@ kubectl apply -f todo-service.yaml
 
 ---
 
-## Test the API
+## Test the API with CRUD 
 
-### POST
+### Create a To-Do (POST)
 
-```http
-POST http://localhost:31000/todos
-Content-Type: application/json
+**Endpoint:**  
+`POST http://localhost:31000/todos`
 
+**Headers:**  
+`Content-Type: application/json`
+
+**Body:**
+```json
 {
-  "title": "Buy milk",
-  "description": "Get 2L full cream",
+  "title": "Finish assignment",
+  "description": "Complete SIT737 Task 9.1P",
   "status": "pending"
 }
 ```
 
-### GET
+**Response:**  
+HTTP 201 Created with inserted object info
 
-```http
-GET http://localhost:31000/todos
+---
+
+### Get All To-Dos (GET)
+
+**Endpoint:**  
+`GET http://localhost:31000/todos`
+
+**Response:**  
+```json
+[
+  {
+    "_id": "mongo_object_id",
+    "title": "Finish assignment",
+    "description": "Complete SIT737 Task 9.1P",
+    "status": "pending"
+  }
+]
 ```
+
+---
+
+### Get a To-Do by ID (GET)
+
+**Endpoint:**  
+`GET http://localhost:31000/todos/<id>`
+
+Replace `<id>` with the Mongo `_id` of the document.
+
+---
+
+### Update a To-Do by ID (PUT)
+
+**Endpoint:**  
+`PUT http://localhost:31000/todos/<id>`
+
+**Headers:**  
+`Content-Type: application/json`
+
+**Body:**
+```json
+{
+  "status": "done"
+}
+```
+
+---
+
+### Delete a To-Do by ID (DELETE)
+
+**Endpoint:**  
+`DELETE http://localhost:31000/todos/<id>`
+
+**Response:**  
+HTTP 200 with deletion status
 
 ---
 
